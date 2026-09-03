@@ -1,0 +1,27 @@
+(function(){
+const data=window.CINEVAULT_CATALOG||[];
+const params=new URLSearchParams(location.search);
+const page=location.pathname.split('/').pop();
+const isSearch=page==='search.html';
+const genre=(params.get('genre')||'').trim();
+const query=(params.get('q')||'').trim();
+const grid=document.getElementById('catalogueGrid');
+const title=document.getElementById('catalogueTitle');
+const lead=document.getElementById('catalogueLead');
+const count=document.getElementById('catalogueCount');
+const sort=document.getElementById('sort');
+const searchInput=document.getElementById('catalogueSearch');
+const empty=document.getElementById('emptyState');
+const typeButtons=[...document.querySelectorAll('[data-type]')];
+let activeType='all';
+function norm(v){return (v||'').toLowerCase().trim()}
+function card(m){const href=(m.type==='series'?'series.html':'movie.html')+'?title='+m.key;return `<a class="card" href="${href}" data-title="${m.t}"><div class="poster image-poster" data-title="${m.t.replace(/"/g,'&quot;')}"><img src="${m.img}" alt="${m.t} ${m.y} poster" loading="lazy"><span>${m.badge||m.y}</span></div><div><h3>${m.t}</h3><p>${m.g.filter(x=>!['Series','Nigeria','African Cinema'].includes(x)).slice(0,3).join(' · ')} · ${m.y}</p></div></a>`}
+function currentSort(list){const mode=sort?sort.value:'popular';return [...list].sort((a,b)=>{if(mode==='az')return a.t.localeCompare(b.t);if(mode==='year')return b.y-a.y||a.t.localeCompare(b.t);if(mode==='newest')return b.y-a.y||b.pop-a.pop;return b.pop-a.pop||b.y-a.y})}
+function render(){let list=data.filter(m=>activeType==='all'||m.type===activeType);if(genre)list=list.filter(m=>m.g.some(g=>norm(g)===norm(genre)));const q=norm(searchInput?searchInput.value:query);if(q)list=list.filter(m=>norm(m.t+' '+m.g.join(' ')+' '+m.y).includes(q));list=currentSort(list);grid.innerHTML=list.map(card).join('');count.textContent=`${list.length} title${list.length===1?'':'s'} found`;empty.hidden=list.length!==0;document.querySelectorAll('.image-poster img').forEach(img=>img.addEventListener('error',()=>{const p=img.closest('.image-poster');if(p){p.classList.add('poster-fallback');img.remove()}},{once:true}));}
+if(isSearch){title.textContent=query?`Search results for “${query}”`:'Search CineVault';lead.textContent='Search across CineVault movies and series by title, genre, country, or year.';}else{title.textContent=genre||'All Titles';lead.textContent=genre?`Explore CineVault’s ${genre} catalogue, then sort by newest, popularity, year, or A–Z.`:'Browse the full CineVault catalogue.';document.querySelectorAll('.genre-chips a').forEach(a=>{if(norm(a.dataset.genre)===norm(genre))a.classList.add('active')})}
+if(searchInput)searchInput.value=query;
+sort&&sort.addEventListener('change',render);
+searchInput&&searchInput.addEventListener('input',()=>{if(isSearch){const q=searchInput.value.trim();history.replaceState(null,'',q?'search.html?q='+encodeURIComponent(q):'search.html')}render()});
+typeButtons.forEach(btn=>btn.addEventListener('click',()=>{activeType=btn.dataset.type;typeButtons.forEach(x=>x.classList.toggle('active',x===btn));render()}));
+render();
+})();
