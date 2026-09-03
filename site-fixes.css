@@ -1,0 +1,37 @@
+/* CineVault NG layout refinements */
+.search-wrap{margin-top:-46px}
+.hero{min-height:535px}
+.hero-content{min-height:535px}
+.hero-copy>p:not(.eyebrow){margin:16px 0 24px;line-height:1.65}
+.hero-stats{margin-top:26px}
+.section{padding-top:54px}
+.section-head{margin-bottom:18px}
+.dark{margin-top:48px;padding:54px 0}
+.promise{margin-top:54px}
+.promise-inner{padding:42px 0;gap:40px}
+.poster{height:320px}
+.searchbar{height:56px}
+
+/* Never leave a broken remote poster looking like an empty card. */
+.image-poster{background:linear-gradient(145deg,var(--burgundy),var(--charcoal) 58%,var(--black))}
+.image-poster img{background:var(--charcoal)}
+
+@media(max-width:850px){
+  .hero,.hero-content{min-height:500px}
+  .search-wrap{margin-top:-34px}
+  .section{padding-top:46px}
+  .dark{margin-top:40px;padding:46px 0}
+  .promise{margin-top:46px}
+}
+@media(max-width:600px){
+  .hero,.hero-content{min-height:480px}
+  .hero h1{font-size:44px}
+  .search-wrap{margin-top:-28px}
+  .section{padding-top:40px}
+  .section-head{align-items:flex-start;gap:8px;flex-direction:column}
+  .section-note{text-align:left}
+  .dark{margin-top:34px;padding:40px 0}
+  .promise{margin-top:40px}
+  .promise-inner{padding:34px 0;gap:24px}
+  .poster{height:225px}
+}
