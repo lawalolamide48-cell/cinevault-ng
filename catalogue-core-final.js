@@ -1,0 +1,1 @@
+window.CINEVAULT_CATALOG=R.map(([t,y,k,g,pop])=>({t,y,type:k==='s'?'series':'movie',g:g.split('.').map(x=>G[x]||x),pop}));
