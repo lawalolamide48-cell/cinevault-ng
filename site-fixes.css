@@ -11,10 +11,20 @@
 .promise-inner{padding:42px 0;gap:40px}
 .poster{height:320px}
 .searchbar{height:56px}
-
-/* Never leave a broken remote poster looking like an empty card. */
 .image-poster{background:linear-gradient(145deg,var(--burgundy),var(--charcoal) 58%,var(--black))}
 .image-poster img{background:var(--charcoal)}
+
+/* Original editorial poster artwork is used where a stable licensed/public poster URL is not available. */
+.card[data-title="Tòkunbò"] .poster{background:url('posters/tokunbo.svg') center/cover no-repeat}
+.card[data-title="Tòkunbò"] .poster>*{visibility:hidden}
+.card[data-title="Áfàméfùnà An Nwa Boi Story"] .poster{background:url('posters/afamefuna.svg') center/cover no-repeat}
+.card[data-title="Áfàméfùnà An Nwa Boi Story"] .poster>*{visibility:hidden}
+.card[data-title="2012"] .poster{background:url('posters/2012.svg') center/cover no-repeat}
+.card[data-title="2012"] .poster>*{visibility:hidden}
+.card[data-title="The Suicide Squad"] .poster{background:url('posters/the-suicide-squad.svg') center/cover no-repeat}
+.card[data-title="The Suicide Squad"] .poster>*{visibility:hidden}
+.card[data-title="The Fall Guy"] .poster{background:url('posters/the-fall-guy.svg') center/cover no-repeat}
+.card[data-title="The Fall Guy"] .poster>*{visibility:hidden}
 
 @media(max-width:850px){
   .hero,.hero-content{min-height:500px}
