@@ -3,8 +3,7 @@ Object.assign(window.CINEVAULT_POSTERS||={}, {
   "The Last House":"https://image.tmdb.org/t/p/w500/6JU7E8Vv2M11egkctWVOScxWR75.jpg",
   "Abigail":"https://pics.filmaffinity.com/Abigail-133797089-large.jpg",
   "The Wedding Party":"https://media.senscritique.com/media/000020919243/0/the_wedding_party.jpg",
-  "October 1":"https://3.bp.blogspot.com/-t533OTd6ORU/VJKbk7ECgbI/AAAAAAAAGq8/oimXSsTpHtg/s1600/October-1.jpg",
-  "Omo Ghetto: The Saga":"https://www.showtimes.com/movies/omo-ghetto-the-saga-154804/movie-poster/",
+  "October 1":"https://3.bp.blogspot.com/-t533OTd6ORU/VJKbk7ECGBI/AAAAAAAAGq8/oimXSsTpHtg/s1600/October-1.jpg",
   "Hijack 93":"https://www.encancha.cl/resizer/v2/YFDVKGQJF5GYFMOOOFU3RLQ2NU.jpg?auth=46298f6258ca79a0e404b5e63ebbbd46fa24e781aa1ade295869d9cdb1d916ed&height=1725&quality=70&smart=true&width=1200",
   "Jagun Jagun: The Warrior":"https://occ-0-1174-299.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcSAmftgkY5s488Yx5DkiAfJUJMcz53m-oXzM7xdpSFJdtv89oYAl6SGJuqMeaFKCxs2SFbyQJP53wg1zcbx9fiCnwISZ-XNMJkw.jpg?r=c66",
   "Blood Sisters":"https://pics.filmaffinity.com/blood_sisters-330469569-large.jpg",
@@ -21,10 +20,6 @@ Object.assign(window.CINEVAULT_POSTERS||={}, {
   "How to Ruin Christmas":"https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/66a4c5114759297.60411b18a78f6.jpg",
   "Savage Beauty":"https://cdn.mos.cms.futurecdn.net/v2/t%3A0%2Cl%3A480%2Ccw%3A2880%2Cch%3A2160%2Cq%3A80%2Cw%3A2560/fKkaboRYgfntv8RzWiuG9R.jpg",
   "Skinny Girl in Transit":"https://ladybrille.com/wp-content/uploads/2017/11/Skinny-Girl-in-Transit-Season-3.jpg",
-  "The Woman King":"https://image.tmdb.org/t/p/w500/423L2fVfQp6y6f2nM2G9f9m1G2S.jpg",
-  "Nairobi Half Life":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Nairobi_Half_Life_Poster.png",
-  "Lísàbí: The Uprising":"https://m.media-amazon.com/images/M/MV5BNjA2NjYxYzgtZTIyYi00NTg5LWE3MGYtMjgxZTIyZTk4MTIzXkEyXkFqcGc%40._V1_.jpg",
-  "Kambili: The Whole 30 Yards":"https://www.filmaffinity.com/images/film/296415256.jpg",
-  "Namaste Wahala":"https://m.media-amazon.com/images/M/MV5BMjU1OTI1OTItNzkwNS00N2M5LWFjYTgtZmFjOTg5YTI0ZjYxXkEyXkFqcGc%40._V1_.jpg"
+  "Nairobi Half Life":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Nairobi_Half_Life_Poster.png"
 });
-/* A poster is deliberately not guessed when a verified image URL is unavailable; poster-system.js supplies a branded fallback instead of a broken image. */
+/* When no verified image URL is available, poster-system.js uses a branded fallback rather than leaving a broken card. */
