@@ -2,16 +2,33 @@ const search=document.getElementById('search'),clear=document.getElementById('cl
 const cards=[...document.querySelectorAll('.card')];
 const sections=[...document.querySelectorAll('.section')];
 function filter(q){q=q.trim().toLowerCase();cards.forEach(card=>{const text=((card.dataset.title||'')+' '+(card.dataset.tags||'')+' '+card.innerText).toLowerCase();card.style.display=!q||text.includes(q)?'':'none';});sections.forEach(section=>{const grid=section.querySelector('.grid');if(!grid)return;const sectionCards=[...grid.querySelectorAll('.card')];if(sectionCards.length)section.style.display=sectionCards.some(c=>c.style.display!=='none')?'':'none';});}
-if(search){search.addEventListener('input',e=>filter(e.target.value));if(clear)clear.addEventListener('click',()=>{search.value='';filter('');search.focus();});}
-document.querySelectorAll('[data-genre]').forEach(button=>button.addEventListener('click',()=>{const genre=button.dataset.genre||'';if(search){search.value=genre;filter(genre);}const target=document.getElementById('movies')||document.getElementById('trending');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}));
+function goSearch(q){location.href=q?'search.html?q='+encodeURIComponent(q):'search.html';}
+if(search){search.addEventListener('input',e=>filter(e.target.value));search.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();goSearch(e.target.value)}});if(clear)clear.addEventListener('click',()=>{search.value='';filter('');search.focus();});}
+document.querySelectorAll('[data-genre]').forEach(button=>button.addEventListener('click',e=>{e.preventDefault();const genre=button.dataset.genre||'';location.href='genre.html?genre='+encodeURIComponent(genre);}));
 const modal=document.getElementById('modal'),modalInput=document.getElementById('modalInput');
 function openModal(){if(!modal)return;modal.classList.add('open');modal.setAttribute('aria-hidden','false');if(modalInput){modalInput.value=search?search.value:'';modalInput.focus();}}
 function closeSearchModal(){if(modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}}
 const openSearch=document.getElementById('openSearch'),heroSearch=document.getElementById('heroSearch'),closeModal=document.getElementById('closeModal');
-if(openSearch)openSearch.onclick=openModal;if(heroSearch)heroSearch.onclick=openModal;if(closeModal)closeModal.onclick=closeSearchModal;if(modal)modal.addEventListener('click',e=>{if(e.target===modal)closeSearchModal();});if(modalInput)modalInput.addEventListener('input',e=>{if(search){search.value=e.target.value;filter(e.target.value);}});
+if(openSearch)openSearch.onclick=openModal;if(heroSearch)heroSearch.onclick=openModal;if(closeModal)closeModal.onclick=closeSearchModal;if(modal)modal.addEventListener('click',e=>{if(e.target===modal)closeSearchModal();});if(modalInput)modalInput.addEventListener('input',e=>{if(search)search.value=e.target.value;});if(modalInput)modalInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();goSearch(e.target.value)}});
 const menu=document.getElementById('menu'),mobileNav=document.getElementById('mobileNav');if(menu&&mobileNav)menu.addEventListener('click',()=>mobileNav.classList.toggle('open'));document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>mobileNav&&mobileNav.classList.remove('open')));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearchModal();if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();openModal();}});
-document.querySelectorAll('.image-poster img').forEach(img=>img.addEventListener('error',()=>{const poster=img.closest('.image-poster');if(poster){poster.classList.add('poster-fallback');img.remove();}},{once:true}));
-filter('');
+const posterMap={
+'Grand Theft Auto VI: An Extended Look':'https://cdn.bingebase.com/movies/221316/posters/nNYOsrgnIuoZcxXprHJRh5l7y5g.webp',
+'Cradle 2 the Grave':'https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2878759/5908779/MOVIH8985__92726.1679563278.jpg?c=2',
+'The Heat':'https://1.bp.blogspot.com/-PlKiXNHLGlk/UnZUNVr5rgI/AAAAAAAADAw/Ohs0pzvi0Xg/s1600/The%2BHeat%2B2013%2Bfilm%2Blarge%2Bmovie%2Bposter%2Bmalaysia.jpg',
+'Tòkunbò':'https://www.rexposters.com/images/works/tokunbo.jpg',
+'Áfàméfùnà: An Nwa Boi Story':'https://miro.medium.com/1%2A9dkDNASymuOpgBs_YYntbA.jpeg',
+'Blood Sisters':'https://www.nollymeter.com/uploads/poster/poster_1747254106.jpg',
+'Shanty Town':'https://artworks.thetvdb.com/banners/v4/series/429156/posters/63cada090149a.jpg',
+'To Kill a Monkey':'https://tobiidowu.com/wp-content/uploads/2025/08/to-kill-a-monkey-review-1.webp',
+'Aníkúlápó: The Series':'https://pics.filmaffinity.com/anikulapo_rise_of_the_spectre-778661580-large.jpg',
+'2012':'https://www.westsideseattle.com/sites/default/files/styles/news_teaser/public/images/www.westseattleherald.com/2010/01/2012_poster.jpg?itok=o-0zILyx',
+'The Suicide Squad':'https://es.web.img3.acsta.net/pictures/21/03/29/11/37/4173669.jpg',
+'The Fall Guy':'https://artofthemovies.co.uk/cdn/shop/files/IMG_5710-1.jpg?v=1708180802'
+};
+function fixMissingPosters(root=document){root.querySelectorAll('.card').forEach(card=>{const title=(card.dataset.title||card.querySelector('h3')?.textContent||'').trim();const src=posterMap[title];if(src){let poster=card.querySelector('.poster');if(poster&&!poster.querySelector('img')){poster.classList.add('image-poster');poster.classList.remove('p3','p4','p5','p6','p7','p8','s3');const old=poster.querySelector('strong');if(old)old.remove();const img=document.createElement('img');img.src=src;img.alt=title+' poster';img.loading='lazy';poster.prepend(img)}}});bindPosterFallbacks(root)}
+function bindPosterFallbacks(root=document){root.querySelectorAll('.image-poster img').forEach(img=>{if(img.dataset.fallbackBound)return;img.dataset.fallbackBound='true';img.addEventListener('error',()=>{const poster=img.closest('.image-poster');if(poster){poster.classList.add('poster-fallback');poster.dataset.title=poster.closest('.card')?.querySelector('h3')?.textContent||'';img.remove()}},{once:true})})}
+fixMissingPosters();
+const observer=new MutationObserver(()=>fixMissingPosters());observer.observe(document.body,{childList:true,subtree:true});
 const upgrades=document.createElement('script');upgrades.src='catalog-enhancements.js';document.head.appendChild(upgrades);
 const genreUpgrades=document.createElement('script');genreUpgrades.src='genre-rails.js';document.head.appendChild(genreUpgrades);
