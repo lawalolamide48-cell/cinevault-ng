@@ -1,4 +1,4 @@
-/* Additional verified poster coverage for titles that were still falling back to placeholders. */
+/* Verified poster coverage for titles that previously fell back to placeholders. */
 Object.assign(window.CINEVAULT_POSTERS||={}, {
   "The Last House":"https://image.tmdb.org/t/p/w500/6JU7E8Vv2M11egkctWVOScxWR75.jpg",
   "Abigail":"https://pics.filmaffinity.com/Abigail-133797089-large.jpg",
@@ -9,11 +9,11 @@ Object.assign(window.CINEVAULT_POSTERS||={}, {
   "Hijack 93":"https://www.encancha.cl/resizer/v2/YFDVKGQJF5GYFMOOOFU3RLQ2NU.jpg?auth=46298f6258ca79a0e404b5e63ebbbd46fa24e781aa1ade295869d9cdb1d916ed&height=1725&quality=70&smart=true&width=1200",
   "Jagun Jagun: The Warrior":"https://occ-0-1174-299.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcSAmftgkY5s488Yx5DkiAfJUJMcz53m-oXzM7xdpSFJdtv89oYAl6SGJuqMeaFKCxs2SFbyQJP53wg1zcbx9fiCnwISZ-XNMJkw.jpg?r=c66",
   "Blood Sisters":"https://pics.filmaffinity.com/blood_sisters-330469569-large.jpg",
-  "Aníkúlápó: The Series":"https://nollywoodlife.ng/wp-content/uploads/2024/01/Anikulapo-Rise-of-the-Sceptre-movie-poster.jpg",
+  "Aníkúlápó: The Series":"https://culturecustodian.com/wp-content/uploads/2024/01/Anikulapo.jpg",
   "Far From Home":"https://pics.filmaffinity.com/far_from_home-487819795-large.jpg",
   "Postcards":"https://m.media-amazon.com/images/M/MV5BNDEyNTBlMWEtZTE5MS00MjcwLTkxN2EtMWIyNjIwYTQ3MTYxXkEyXkFqcGc%40._V1_.jpg",
-  "Shanty Town":"https://www.cinemaclock.com/images/posters/1000x1500/25/shanty-town-2023-us-poster.jpg",
-  "To Kill a Monkey":"https://miro.medium.com/1%2AobCsx3a0O2MBX8TYNlOYHQ.jpeg",
+  "Shanty Town":"https://nigerianmoviesreview.com/wp-content/uploads/2023/01/shanti.jpg",
+  "To Kill a Monkey":"https://nollymeter.com/uploads/poster/poster_1752928676.jpg",
   "King of Boys: The Return of the King":"https://image.tmdb.org/t/p/original/vWI6qVGOklBCfdcskDdVcm2JXA6.jpg",
   "Olóládé":"https://images.justwatch.com/poster/320314362/s718/season-1.jpg",
   "Wura":"https://www.nollymeter.com/uploads/poster/poster_1751730773.jpg",
