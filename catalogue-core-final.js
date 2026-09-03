@@ -1,1 +1,1 @@
-window.CINEVAULT_CATALOG=R.map(([t,y,k,g,pop])=>({t,y,type:k==='s'?'series':'movie',g:g.split('.').map(x=>G[x]||x),pop})).filter((m,i,a)=>i===a.findIndex(x=>x.t.toLowerCase()===m.t.toLowerCase()));
+const rows=window.CINEVAULT_ROWS||[];const genres=window.CINEVAULT_GENRES||{};window.CINEVAULT_CATALOG=rows.map(([t,y,k,g,pop])=>({t,y,type:k==='s'?'series':'movie',g:String(g||'').split('.').map(x=>genres[x]||x),pop:Number(pop)||0})).filter((m,i,a)=>i===a.findIndex(x=>x.t.toLowerCase()===m.t.toLowerCase()));
