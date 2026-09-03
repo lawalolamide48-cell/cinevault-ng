@@ -14,3 +14,4 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearchModal();i
 document.querySelectorAll('.image-poster img').forEach(img=>img.addEventListener('error',()=>{const poster=img.closest('.image-poster');if(poster){poster.classList.add('poster-fallback');img.remove();}},{once:true}));
 filter('');
 const upgrades=document.createElement('script');upgrades.src='catalog-enhancements.js';document.head.appendChild(upgrades);
+const genreUpgrades=document.createElement('script');genreUpgrades.src='genre-rails.js';document.head.appendChild(genreUpgrades);
