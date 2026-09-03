@@ -34,12 +34,12 @@ const NIGERIA=[
 {t:'King of Boys',y:'2018',g:'Crime · Drama',img:'https://fr.web.img6.acsta.net/pictures/19/04/29/14/58/0086198.jpg'},
 {t:'The Wedding Party',y:'2016',g:'Romance · Comedy',img:'https://media.senscritique.com/media/000020919243/0/the_wedding_party.jpg'},
 {t:'The Figurine: Araromire',y:'2010',g:'Mystery · Drama',img:'https://images.justwatch.com/poster/300655798/s718/the-figurine.jpg'},
-{t:'Hijack 93',y:'2024',g:'Thriller · Drama',img:'https://image.tmdb.org/t/p/original/4fZ3W2QWQ9n0Y9m5f1Q3Y9Z0V4h.jpg'},
-{t:'Amina',y:'2021',g:'Drama · Historical',img:'https://image.tmdb.org/t/p/original/6FhQ3n7oR7xw6V3p8T4m1Z0k2sA.jpg'},
-{t:'Man of God',y:'2022',g:'Drama',img:'https://image.tmdb.org/t/p/original/6YwV0d1J5zX7xK8gH3m9Q2v4L6B.jpg'},
-{t:'Swallow',y:'2021',g:'Drama',img:'https://image.tmdb.org/t/p/original/3H7bK9dL4pQ1mS6xV8n2W0zY5cA.jpg'},
-{t:'Ẹlẹṣin Ọba: The King’s Horseman',y:'2022',g:'Drama · Historical',img:'https://image.tmdb.org/t/p/original/5vG5M6kY0J7R9X2sQ3n4B8cD1aE.jpg'},
-{t:'Sanitation Day',y:'2021',g:'Crime · Thriller',img:'https://image.tmdb.org/t/p/original/7uG9Y0V4s5K3D2N8m1Q6B7cX9aZ.jpg'}
+{t:'Hijack 93',y:'2024',g:'Thriller · Drama',img:'https://media.senscritique.com/media/000022425172/0/le_detournement.jpg'},
+{t:'Amina',y:'2021',g:'Action · Adventure · Biography',img:'https://cdn.pmnewsnigeria.com/wp-content/uploads/2021/10/EA3A8FE2-05E9-4068-83FC-849EAA20FEB2.jpeg'},
+{t:'The Man of God',y:'2022',g:'Drama',img:'https://cdn.kinocheck.com/i/9ulny1w3az.jpg'},
+{t:'Swallow',y:'2021',g:'Drama · History · Thriller',img:'https://fr.web.img6.acsta.net/pictures/21/09/17/10/08/2854026.jpg'},
+{t:'Ẹlẹṣin Ọba: The King’s Horseman',y:'2022',g:'Drama · Historical',img:'https://de.web.img2.acsta.net/r_1280_720/pictures/22/10/31/14/36/2818809.jpg'},
+{t:'Sanitation Day',y:'2021',g:'Crime · Thriller',img:'https://cdn.businessday.ng/wp-content/uploads/2021/01/sanitation-day.jpg'}
 ];
 function key(t){return encodeURIComponent(t)}
 function card(m,badge){return `<a class="card" href="movie.html?title=${key(m.t)}" data-title="${m.t}" data-tags="${m.g} ${m.y} global movie nigeria nollywood"><div class="poster image-poster"><img src="${m.img}" alt="${m.t} ${m.y} movie poster" loading="lazy"><span>${badge||m.y}</span></div><div><h3>${m.t}</h3><p>${m.g} · ${m.y}</p></div></a>`}
