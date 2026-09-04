@@ -1,4 +1,5 @@
-const { issueSignedToken, presignUrl } = require('@vercel/blob');
+const { get } = require('@vercel/blob');
+const { Readable } = require('node:stream');
 const downloads = require('../downloads.json');
 
 module.exports = async function handler(req, res) {
@@ -12,24 +13,26 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const validUntil = Date.now() + 10 * 60 * 1000;
-    const token = await issueSignedToken({
-      pathname,
-      operations: ['get'],
-      validUntil
+    // Private Blob files are fetched server-side and streamed to the visitor.
+    // When the store is connected to Vercel, the Blob SDK can use Vercel's
+    // short-lived OIDC credentials automatically. A legacy read-write token
+    // is also accepted if one exists in the project environment.
+    const result = await get(pathname, {
+      access: 'private',
+      token: process.env.BLOB_READ_WRITE_TOKEN || undefined
     });
 
-    const { presignedUrl } = await presignUrl(token, {
-      pathname,
-      operation: 'get',
-      validUntil
-    });
-
-    if (!presignedUrl || presignedUrl.includes('.undefined.')) {
-      throw new Error('Vercel Blob returned an invalid presigned URL.');
+    if (!result || result.statusCode !== 200) {
+      return res.status(404).json({ error: 'The authorized file could not be found in storage.' });
     }
 
-    return res.redirect(302, presignedUrl);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', result.blob.contentType || 'application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(title)}.mp4"`);
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Cache-Control', 'private, no-store');
+
+    Readable.fromWeb(result.stream).pipe(res);
   } catch (error) {
     console.error('CineVault download error:', error);
     return res.status(500).json({ error: 'Download service is temporarily unavailable.' });
