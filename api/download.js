@@ -3,6 +3,7 @@ const downloads = require('../downloads.json');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+
   const title = String(req.query?.title || '').trim();
   const pathname = downloads[title];
 
@@ -11,12 +12,21 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const token = await issueSignedToken({ operations: ['get'] });
+    // Private Blob signed URLs must be scoped to the exact pathname and operation.
+    const validUntil = Date.now() + 10 * 60 * 1000;
+    const token = await issueSignedToken({
+      pathname,
+      operations: ['get'],
+      validUntil
+    });
+
     const { presignedUrl } = await presignUrl(token, {
       pathname,
       operation: 'get',
-      validUntil: Date.now() + 10 * 60 * 1000
+      validUntil
     });
+
+    if (!presignedUrl) throw new Error('Vercel Blob did not return a presigned URL.');
     return res.redirect(302, presignedUrl);
   } catch (error) {
     console.error('CineVault download error:', error);
