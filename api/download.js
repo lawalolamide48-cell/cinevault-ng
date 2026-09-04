@@ -12,7 +12,6 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Private Blob signed URLs must be scoped to the exact pathname and operation.
     const validUntil = Date.now() + 10 * 60 * 1000;
     const token = await issueSignedToken({
       pathname,
@@ -26,7 +25,10 @@ module.exports = async function handler(req, res) {
       validUntil
     });
 
-    if (!presignedUrl) throw new Error('Vercel Blob did not return a presigned URL.');
+    if (!presignedUrl || presignedUrl.includes('.undefined.')) {
+      throw new Error('Vercel Blob returned an invalid presigned URL.');
+    }
+
     return res.redirect(302, presignedUrl);
   } catch (error) {
     console.error('CineVault download error:', error);
