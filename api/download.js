@@ -26,9 +26,11 @@ module.exports = async function handler(req, res) {
       return res.status(404).json({ error: 'The authorized file could not be found in storage.' });
     }
 
+    const extension = pathname.includes('.') ? pathname.slice(pathname.lastIndexOf('.')) : '';
+
     res.statusCode = 200;
     res.setHeader('Content-Type', result.blob.contentType || 'application/octet-stream');
-    res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(title)}.mp4"`);
+    res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(title)}${extension}"`);
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Cache-Control', 'private, no-store');
 
