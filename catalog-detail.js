@@ -15,7 +15,8 @@ const poster=document.getElementById('detailPoster');if(poster&&d.image){poster.
 const watch=d.watch||catalog.watch||('https://www.justwatch.com/ng/search?q='+encodeURIComponent(catalog.t));
 ['watchBtn','watchBtn2'].forEach(id=>{const a=document.getElementById(id);if(a){a.href=watch;a.target='_blank';a.rel='noopener noreferrer'}});
 const wc=document.getElementById('watchCopy');if(wc)wc.textContent=catalog.watch?'Open the official streaming page for this title.':'Search JustWatch Nigeria for current legal streaming and rental options; availability can change by region.';
-const hasAuthorizedDownload=Boolean(window.CINEVAULT_DOWNLOADS&&window.CINEVAULT_DOWNLOADS[catalog.t]);
+let downloads={};try{const r=await fetch('/downloads.json?v=20260904',{cache:'no-store'});if(r.ok)downloads=await r.json()}catch(e){console.warn('CineVault download manifest unavailable',e)}
+const hasAuthorizedDownload=Boolean(downloads[catalog.t]);
 ['downloadBtn','downloadBtn2'].forEach(id=>{const a=document.getElementById(id);if(!a)return;if(hasAuthorizedDownload){a.href='/api/download?title='+encodeURIComponent(catalog.t);a.target='_blank';a.rel='noopener';a.removeAttribute('aria-disabled');a.classList.remove('disabled');a.textContent='Download'}else{a.removeAttribute('href');a.setAttribute('aria-disabled','true');a.classList.add('disabled');a.textContent='Download unavailable'}});
 const dc=document.getElementById('downloadCopy');if(dc)dc.textContent=hasAuthorizedDownload?'An authorized CineVault file is connected. Your download link is securely signed for a limited time.':'Direct downloads are enabled only for movies CineVault NG owns, licenses, or is explicitly authorized to distribute.';
 const season=document.getElementById('seasonLabel');if(season&&catalog.type==='series')season.textContent=d.season?`Season ${d.season}`:'Series';document.title=`${catalog.t} | CineVault NG`;
